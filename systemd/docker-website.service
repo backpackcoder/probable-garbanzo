@@ -1,0 +1,13 @@
+[Unit]
+Description=hammermission.org website
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --name website -p 80:80 -p 443:443 -v /etc/nginx/ssl:/etc/nginx/ssl hammermission/hapa-pakubwa-website 
+ExecStop=/usr/bin/docker stop -t 2 website
+ExecStopPost=/usr/bin/docker rm -f website
+
+[Install]
+WantedBy=default.target

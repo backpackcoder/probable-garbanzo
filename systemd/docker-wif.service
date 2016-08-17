@@ -1,0 +1,14 @@
+[Unit]
+Description=World in Flames web application
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --name wif -p 3000:3000 backpackcoder/world-in-flames
+ExecStop=/usr/bin/docker stop -t 2 wif
+ExecStopPost=/usr/bin/docker rm -f wif
+
+[Install]
+WantedBy=default.target
+
