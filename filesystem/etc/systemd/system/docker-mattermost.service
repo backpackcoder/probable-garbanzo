@@ -1,0 +1,13 @@
+[Unit]
+Description=hammermission.org Mattermost
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker-compose -f/etc/docker-compose/mattermost.yml up
+ExecStop=/usr/bin/docker-compose -f/etc/docker-compose/mattermost.yml stop
+ExecStopPost=/usr/bin/docker-compose -f/etc/docker-compose/mattermost.yml rm -f
+
+[Install]
+WantedBy=default.target
